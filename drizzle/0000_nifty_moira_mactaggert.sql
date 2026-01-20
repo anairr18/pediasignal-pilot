@@ -1,4 +1,4 @@
-CREATE TABLE "chat_conversations" (
+CREATE TABLE IF NOT EXISTS "chat_conversations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"session_id" text NOT NULL,
 	"parent_message" text NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE "chat_conversations" (
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "kb_passages" (
+CREATE TABLE IF NOT EXISTS "kb_passages" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"case_id" text NOT NULL,
 	"stage" integer NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE "kb_passages" (
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "kb_rules" (
+CREATE TABLE IF NOT EXISTS "kb_rules" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"case_id" text NOT NULL,
 	"kind" text NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE "kb_rules" (
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "misinfo_logs" (
+CREATE TABLE IF NOT EXISTS "misinfo_logs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"content" text NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE "misinfo_logs" (
 	"detected_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "simulations" (
+CREATE TABLE IF NOT EXISTS "simulations" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
 	"case_type" text NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE "simulations" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "users" (
+CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"username" text NOT NULL,
 	"email" text NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE "users" (
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE "waitlist" (
+CREATE TABLE IF NOT EXISTS "waitlist" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"email" text NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE "waitlist" (
 	CONSTRAINT "waitlist_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE "xray_analyses" (
+CREATE TABLE IF NOT EXISTS "xray_analyses" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
 	"filename" text NOT NULL,
@@ -99,5 +99,14 @@ CREATE TABLE "xray_analyses" (
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-ALTER TABLE "simulations" ADD CONSTRAINT "simulations_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "xray_analyses" ADD CONSTRAINT "xray_analyses_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+DO $$ BEGIN
+ ALTER TABLE "simulations" ADD CONSTRAINT "simulations_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "xray_analyses" ADD CONSTRAINT "xray_analyses_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;

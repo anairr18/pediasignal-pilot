@@ -1,4 +1,4 @@
-CREATE TABLE "kb_queries" (
+CREATE TABLE IF NOT EXISTS "kb_queries" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
 	"session_id" text NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "kb_queries" (
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "objective_coverage" (
+CREATE TABLE IF NOT EXISTS "objective_coverage" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"simulation_id" integer NOT NULL,
 	"objective_id" text NOT NULL,
@@ -33,5 +33,14 @@ CREATE TABLE "objective_coverage" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-ALTER TABLE "kb_queries" ADD CONSTRAINT "kb_queries_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "objective_coverage" ADD CONSTRAINT "objective_coverage_simulation_id_simulations_id_fk" FOREIGN KEY ("simulation_id") REFERENCES "public"."simulations"("id") ON DELETE no action ON UPDATE no action;
+DO $$ BEGIN
+ ALTER TABLE "kb_queries" ADD CONSTRAINT "kb_queries_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "objective_coverage" ADD CONSTRAINT "objective_coverage_simulation_id_simulations_id_fk" FOREIGN KEY ("simulation_id") REFERENCES "public"."simulations"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
