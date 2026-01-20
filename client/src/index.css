@@ -1,0 +1,357 @@
+/* Professional Typography - Must be imported first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.75rem;
+  
+  /* Medical theme colors */
+  --medical-blue: hsl(232, 62%, 20%);
+  --medical-purple: hsl(262, 73%, 35%);
+  --accent-green: hsl(158, 64%, 52%);
+  --accent-amber: hsl(43, 96%, 56%);
+  --accent-red: hsl(0, 84%, 60%);
+  --gradient-start: hsl(232, 62%, 20%);
+  --gradient-end: hsl(262, 73%, 35%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 200; /* Ultra-thin for headings */
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+  
+  .professional-text {
+    font-weight: 200; /* Even thinner */
+    letter-spacing: -0.03em;
+    line-height: 1.5;
+  }
+  
+  .professional-heading {
+    font-weight: 100; /* Thinnest possible */
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+
+  body {
+    @apply font-sans antialiased text-foreground;
+    background: linear-gradient(135deg, hsl(232, 62%, 20%) 0%, hsl(262, 73%, 35%) 100%);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-weight: 200; /* Thinner base font */
+    letter-spacing: -0.03em;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: 'opsz' auto;
+  }
+  
+  html {
+    background: linear-gradient(135deg, hsl(232, 62%, 20%) 0%, hsl(262, 73%, 35%) 100%);
+    min-height: 100vh;
+  }
+
+  .medical-gradient {
+    background: linear-gradient(135deg, hsl(232, 62%, 20%) 0%, hsl(262, 73%, 35%) 100%);
+  }
+  
+  /* Override all font weights for professional appearance */
+  p, span, div, label, button, input, select, option, textarea, li, td, th {
+    font-weight: 200 !important;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Navigation and header elements */
+  nav, header {
+    font-weight: 100 !important;
+    letter-spacing: -0.03em;
+  }
+  
+  /* Button elements */
+  button, .btn {
+    font-weight: 200 !important;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Form elements */
+  input, select, textarea {
+    font-weight: 200 !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+  
+  /* Card content */
+  .card, .card-content {
+    font-weight: 200 !important;
+  }
+  
+  /* Override Tailwind font weights */
+  .font-normal {
+    font-weight: 200 !important;
+  }
+  
+  .font-medium {
+    font-weight: 300 !important;
+  }
+  
+  .font-semibold {
+    font-weight: 300 !important;
+  }
+  
+  .font-bold {
+    font-weight: 400 !important;
+  }
+
+  .hero-background {
+    background-image: url('@assets/ChatGPT Image Jul 22, 2025, 05_42_44 PM_1753224530155.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+  }
+
+  .hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.7) 100%);
+    z-index: 1;
+  }
+
+  .hero-background > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-gradient {
+    background: linear-gradient(135deg, hsl(215, 25%, 27%) 0%, hsl(220, 13%, 18%) 100%);
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 20px hsl(262, 73%, 55%, 0.3);
+  }
+
+  .vital-pulse {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .medical-card {
+    @apply bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl;
+  }
+
+  .intervention-button {
+    @apply w-full py-3 px-4 rounded-lg font-medium transition-all border;
+  }
+
+  .intervention-red {
+    @apply bg-red-600/20 hover:bg-red-600/30 border-red-600/50 text-red-300;
+  }
+
+  .intervention-blue {
+    @apply bg-blue-600/20 hover:bg-blue-600/30 border-blue-600/50 text-blue-300;
+  }
+
+  .intervention-green {
+    @apply bg-green-600/20 hover:bg-green-600/30 border-green-600/50 text-green-300;
+  }
+
+  .intervention-amber {
+    @apply bg-amber-600/20 hover:bg-amber-600/30 border-amber-600/50 text-amber-300;
+  }
+
+  /* Professional button styles - remove all colors */
+  .btn-primary, button[variant="default"] {
+    @apply bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-600 font-light;
+  }
+
+  .btn-secondary, button[variant="secondary"] {
+    @apply bg-slate-700 hover:bg-slate-600 text-slate-200 border-slate-500 font-light;
+  }
+
+  .btn-outline, button[variant="outline"] {
+    @apply bg-transparent hover:bg-slate-800 text-slate-300 border-slate-600 font-light;
+  }
+
+  /* Override any colorful button classes */
+  .bg-blue-600, .bg-blue-500, .bg-green-600, .bg-green-500, .bg-purple-600, .bg-purple-500 {
+    @apply bg-slate-800 !important;
+  }
+
+  .hover\:bg-blue-700:hover, .hover\:bg-green-700:hover, .hover\:bg-purple-700:hover {
+    @apply hover:bg-slate-700 !important;
+  }
+
+  .text-blue-400, .text-green-400, .text-purple-400 {
+    @apply text-slate-300 !important;
+  }
+
+  /* Smooth scrolling and transitions */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Progress bar styles */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+    z-index: 100;
+    transition: width 0.3s ease;
+  }
+
+  /* Section animations */
+  .section-animate {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .section-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Enhanced card hover animations */
+  .feature-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Smooth fade transitions */
+  .fade-in {
+    animation: fadeIn 1.2s ease-in-out;
+  }
+
+  .fade-in-delay-1 {
+    animation: fadeIn 1.2s ease-in-out 0.2s both;
+  }
+
+  .fade-in-delay-2 {
+    animation: fadeIn 1.2s ease-in-out 0.4s both;
+  }
+
+  .fade-in-delay-3 {
+    animation: fadeIn 1.2s ease-in-out 0.6s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Staggered animation for statistics */
+  .stat-item {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: statAppear 0.6s ease forwards;
+  }
+
+  .stat-item:nth-child(1) { animation-delay: 0.1s; }
+  .stat-item:nth-child(2) { animation-delay: 0.2s; }
+  .stat-item:nth-child(3) { animation-delay: 0.3s; }
+  .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes statAppear {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Section breaks */
+  .section-break {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #06b6d4, transparent);
+    margin: 4rem 0;
+    opacity: 0.3;
+  }
+
+  /* Colored icons and text */
+  .icon-blue { color: #3b82f6 !important; }
+  .icon-purple { color: #8b5cf6 !important; }
+  .icon-cyan { color: #06b6d4 !important; }
+  .icon-emerald { color: #10b981 !important; }
+  .icon-orange { color: #f59e0b !important; }
+  .icon-rose { color: #f43f5e !important; }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-emerald {
+    background: linear-gradient(135deg, #10b981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .keyword-highlight {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
